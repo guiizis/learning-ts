@@ -1,9 +1,18 @@
 // Please fill in any missing type annotations here...
+type assigments =
+	| "Susie"
+	| "Tommy"
+	| "Angelica"
+	| "Chuckie"
+	| "Kimi"
+	| "Timmy"
+	| undefined;
+
 const headOfTable = "Me!";
-let adjacentLeft;
-let adjacentRight;
-let furtherLeft;
-let furtherRight;
+let adjacentLeft: assigments;
+let adjacentRight: assigments;
+let furtherLeft: assigments;
+let furtherRight: assigments;
 
 // I always invite Susie and Tommy! ♥
 if (Math.random() > 0.5) {
