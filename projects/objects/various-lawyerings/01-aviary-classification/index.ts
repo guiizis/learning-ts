@@ -1,5 +1,18 @@
 // Write your Bird type here! ✨
 
+type BirdBase = {
+	diet: string;
+	name: string;
+};
+
+type NoisyBird = BirdBase & { noisy: boolean };
+
+type DangerousBird = BirdBase & { dangerous: boolean };
+
+type IntelligentBird = BirdBase & { intelligent: boolean };
+
+type Bird = NoisyBird | DangerousBird | IntelligentBird;
+
 export const birds: Bird[] = [
 	{
 		dangerous: true,

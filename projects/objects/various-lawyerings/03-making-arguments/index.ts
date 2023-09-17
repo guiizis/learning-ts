@@ -1,5 +1,51 @@
 // Write your types here! ✨
 
+// type Motion = {
+// 	annoyedJustice?: boolean,
+// 	classification: string,
+// 	deliberationHours?: number,
+// 	from: string,
+// 	reason: string,
+// 	status: "denied" | "allowed" | "pending",
+// 	step: "post-trial" | "pre-trial",
+// 	estimatedDeliberationHours?: number
+// }
+
+type BaseMotion = {
+	from: "defendant" | "plaintiff";
+	reason: string;
+};
+
+type PreTrial = BaseMotion & {
+	classification: "dismiss" | "suppress" | "venue";
+	step: "pre-trial";
+};
+
+type PostTrial = BaseMotion & {
+	classification: "acquittal" | "correction" | "new trial";
+	step: "post-trial";
+};
+
+type TrialType = PostTrial | PreTrial;
+
+type Allowed = TrialType & {
+	deliberationHours: number;
+	status: "allowed";
+};
+
+type Denied = TrialType & {
+	annoyedJustice: boolean;
+	deliberationHours: number;
+	status: "denied";
+};
+
+type Pending = TrialType & {
+	estimatedDeliberationHours: number;
+	status: "pending";
+};
+
+type Motion = Allowed | Denied | Pending;
+
 export const motions: Motion[] = [
 	{
 		annoyedJustice: true,
@@ -73,3 +119,20 @@ export const motions: Motion[] = [
 		step: "post-trial",
 	},
 ];
+
+// o que é variavel
+
+// se é permitido 'allowed' tem essa prop a mais
+// deliberationHours
+
+// se é 'dennied' tem essa prop a mais
+// annoyedJustice
+
+// se é 'pending' tem essa prop a mais
+// estimatedDeliberationHours
+
+// pre-trial
+// classification: dismiss, suppress, venue
+
+//pos-trial
+// classification: acquittal, correction, new trial
