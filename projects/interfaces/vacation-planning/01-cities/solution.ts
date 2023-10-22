@@ -1,21 +1,17 @@
 export interface City {
-	catchphrase?: string;
-	coordinates: Coordinates;
+	coordinates: {
+		north: [number, number, number];
+		west: [number, number, number];
+	};
 	name: string;
+	catchphrase?: string;
 }
 
-export interface Coordinates {
-	north: Coordinate;
-	west: Coordinate;
-}
-
-export type Coordinate = [number, number, number];
-
-function describeUnit(unit: number) {
+function describeUnit(unit: number): string {
 	return unit.toString().padStart(2, "0");
 }
 
-function describeCoordinate(coordinate: Coordinate) {
+function describeCoordinate(coordinate: [number, number, number]): string {
 	return [
 		`${describeUnit(coordinate[0])}°`,
 		`${describeUnit(coordinate[1])}'`,
@@ -23,20 +19,12 @@ function describeCoordinate(coordinate: Coordinate) {
 	].join("");
 }
 
-export function describeCity(city: City) {
-	const lines = [`${city.name}, New York`];
+export function describeCity(city: City): string {
+	const catchphrase = city.catchphrase ? `* ${city.catchphrase}` : "";
 
-	if (city.catchphrase) {
-		lines.push(`* "${city.catchphrase}"`);
-	}
-
-	lines.push(
-		[
-			`* Located at`,
-			`${describeCoordinate(city.coordinates.north)}N`,
-			`${describeCoordinate(city.coordinates.west)}W`,
-		].join(" ")
-	);
-
-	return lines.join("\n");
+	return `${city.name}, New York \n
+          ${catchphrase}\n
+          * Located at ${describeCoordinate(
+						city.coordinates.north
+					)}N ${describeCoordinate(city.coordinates.west)}W`;
 }

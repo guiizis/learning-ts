@@ -1,2 +1,19 @@
-// Write your groupRestaurants function here! ✨
-// You'll need to export it so the tests can run it.
+export interface Restaurant {
+	city: string;
+	name: string;
+}
+
+export interface GroupedRestaurants {
+	[i: string]: string[];
+}
+
+export function groupRestaurants(restaurant: Restaurant[]) {
+	const allRestaurants: GroupedRestaurants = {};
+
+	for (let res of restaurant) {
+		if (!allRestaurants.hasOwnProperty(res.city)) {
+			allRestaurants[res.city] = [];
+		}
+		allRestaurants[res.city].push(res.name);
+	}
+}
